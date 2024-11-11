@@ -1,31 +1,33 @@
-import Link from 'next/link'
-import { IoIosArrowBack } from 'react-icons/io'
+// app/singleproducts/[id]/page.js
 
-const Page = async ({ params }) => {
+import Image from 'next/image'
+
+export default async function SingleProductPage ({ params }) {
   const { id } = params
-  let product
 
   try {
     const response = await fetch(`https://dummyjson.com/products/${id}`)
     if (!response.ok) {
       throw new Error('Failed to fetch product')
     }
-    product = await response.json()
+    const product = await response.json()
+
+    return (
+      <div>
+        <h1>{product.title}</h1>
+        <Image
+          src={product.thumbnail}
+          width={250}
+          height={250}
+          alt={product.title}
+        />
+        <p>{product.description}</p>
+        <p>Price: ${product.price}</p>
+        {/* Add other product details as needed */}
+      </div>
+    )
   } catch (error) {
     console.error(error)
-    return <p>Could not load product details. Please try again later.</p>
+    return <p>Could not load product. Please try again later.</p>
   }
-
-  return (
-    <div className='flex flex-col gap-10'>
-      <Link href='/'>
-        <button className='flex gap-2 items-center'>
-          <IoIosArrowBack /> Go back
-        </button>
-      </Link>
-      <div>{product.description}</div>
-    </div>
-  )
 }
-
-export default Page

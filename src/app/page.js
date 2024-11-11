@@ -3,15 +3,30 @@ import Image from 'next/image'
 
 export default async function Home () {
   try {
-    const response = await fetch('https://dummyjson.com/products')
-    if (!response.ok) {
+    // Make parallel requests to both categories
+    const [beautyResponse, fragrancesResponse] = await Promise.all([
+      fetch('https://dummyjson.com/products/category/beauty'),
+      fetch('https://dummyjson.com/products/category/fragrances')
+    ])
+
+    // Check if both requests were successful
+    if (!beautyResponse.ok || !fragrancesResponse.ok) {
       throw new Error('Failed to fetch products')
     }
-    const data = await response.json()
+
+    // Parse the JSON responses
+    const beautyData = await beautyResponse.json()
+    const fragrancesData = await fragrancesResponse.json()
+
+    // Combine the products from both categories
+    const combinedProducts = [
+      ...beautyData.products,
+      ...fragrancesData.products
+    ]
 
     return (
       <div>
-        {data.products.map(product => (
+        {combinedProducts.map(product => (
           <div key={product.id}>
             <Image
               src={product.thumbnail}
@@ -19,7 +34,7 @@ export default async function Home () {
               height={250}
               alt={product.title}
             />
-            <Link href={`/singleproduct/${product.id}`}>{product.title}</Link>
+            <Link href={`/singleproducts/${product.id}`}>{product.title}</Link>
           </div>
         ))}
       </div>
