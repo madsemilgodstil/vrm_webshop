@@ -2,11 +2,19 @@ import Link from 'next/link'
 import { IoIosArrowBack } from 'react-icons/io'
 
 const Page = async ({ params }) => {
-  const id = (await params).id
+  const { id } = params
+  let product
 
-  let response = await fetch(`https://dummyjson.com/products/${id}`)
-
-  let product = await response.json()
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${id}`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch product')
+    }
+    product = await response.json()
+  } catch (error) {
+    console.error(error)
+    return <p>Could not load product details. Please try again later.</p>
+  }
 
   return (
     <div className='flex flex-col gap-10'>
