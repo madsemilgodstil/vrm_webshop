@@ -1,5 +1,3 @@
-// app/singleproducts/[id]/page.js
-
 import Image from 'next/image'
 
 export default async function SingleProductPage ({ params }) {
@@ -23,7 +21,6 @@ export default async function SingleProductPage ({ params }) {
         />
         <p>{product.description}</p>
         <p>Price: ${product.price}</p>
-        {/* Add other product details as needed */}
       </div>
     )
   } catch (error) {
