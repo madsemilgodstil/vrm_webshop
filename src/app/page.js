@@ -34,7 +34,9 @@ export default async function Home () {
               height={250}
               alt={product.title}
             />
-            <Link href={`/singleproducts/${product.id}`}>{product.title}</Link>
+            <Link href={`pages/singleproducts/${product.id}`}>
+              {product.title}
+            </Link>
           </div>
         ))}
       </div>
