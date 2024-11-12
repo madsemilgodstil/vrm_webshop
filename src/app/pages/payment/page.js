@@ -1,35 +1,11 @@
+import Payment from "@/components/payment/Payment";
 import Button from "@/components/knapper/button";
 
-export function Payment() {
+export default function PaymentPage() {
   return (
-    <div className="max-w-3xl space-y-4 my-10 mx-auto">
-      <div className="product flex items-center">
-        <p className="w-16 h-16 bg-gray-200 mr-4 flex items-center justify-center">Images her</p>
-        <div className="content">
-          <h2>Produktnavn</h2>
-          <p>Pris</p>
-        </div>
-      </div>
-      <div className="product flex items-center">
-        <p className="w-16 h-16 bg-gray-200 mr-4 flex items-center justify-center">Images her</p>
-        <div className="content">
-          <h2>Produktnavn</h2>
-          <p>Pris</p>
-        </div>
-      </div>
-      <div className="product flex items-center">
-        <p className="w-16 h-16 bg-gray-200 mr-4 flex items-center justify-center">Images her</p>
-        <div className="content">
-          <h2>Produktnavn</h2>
-          <p>Pris</p>
-        </div>
-      </div>
-      <div className="mt-6 text-center">
-        <p className="text-lg">I alt at betale: ,-</p>
-        <Button text="Betal her" />
-      </div>
+    <div className="max-w-[700px] mx-auto my-10">
+      <Payment />
+      <Button text="Betal her" />
     </div>
   );
 }
-
-export default Payment;
