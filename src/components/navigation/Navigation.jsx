@@ -9,7 +9,7 @@ const Navigation = () => {
         <Link href="/pages/products">Products</Link>
       </div>
 
-      <Link href="../pages/payment">
+      <Link href="/pages/payment">
         <MdShoppingCart size={24} />
       </Link>
     </div>
