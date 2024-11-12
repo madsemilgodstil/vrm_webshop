@@ -5,7 +5,8 @@ const Payment = () => {
         <p className="w-16 h-16 bg-gray-200 mr-4 flex items-center justify-center">Images her</p>
         <div className="content">
           <h2>Produktnavn</h2>
-          <p>Pris</p>
+          <p>Antal:</p>
+          <p>Pri:</p>
         </div>
       </div>
       <p className="text-lg">I alt at betale: ,-</p>
