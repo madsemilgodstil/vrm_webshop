@@ -25,7 +25,11 @@ export default async function SingleProductPage ({ params }) {
           <p>Price: ${product.price}</p>
         </div>
         <div>
-          <RelatedProducts />
+          {/* Pass the category and current product ID */}
+          <RelatedProducts
+            category={product.category}
+            currentProductId={product.id}
+          />
         </div>
       </>
     )
