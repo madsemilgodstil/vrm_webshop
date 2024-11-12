@@ -6,7 +6,7 @@ const Navigation = () => {
     <div className="flex justify-between py-4 max-w-7xl mx-auto">
       <div className="flex space-x-6">
         <Link href="/">Home</Link>
-        <Link href="../pages/products">Products</Link>
+        <Link href="/pages/products">Products</Link>
       </div>
 
       <Link href="../pages/payment">
