@@ -1,5 +1,6 @@
 import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
+import Search from "@/components/search/Search";
 
 const Navigation = () => {
   return (
@@ -7,9 +8,10 @@ const Navigation = () => {
       <div className="flex space-x-6">
         <Link href="/">Home</Link>
         <Link href="/products">Products</Link>
+        <Search />
       </div>
 
-      <Link href="/payment">
+      <Link href="../pages/payment">
         <MdShoppingCart size={24} />
       </Link>
     </div>
