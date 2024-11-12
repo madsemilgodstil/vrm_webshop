@@ -4,7 +4,7 @@ import ProductList from "@/components/productlist/ProductList";
 
 export default async function Home() {
   return (
-    <div className="grid grid-cols-[66%_33%]">
+    <div className="main grid grid-cols-[66%_33%]">
       <ProductList />
     </div>
   );
