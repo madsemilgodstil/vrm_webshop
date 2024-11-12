@@ -2,7 +2,6 @@ import Image from "next/image";
 
 const RelatedProducts = async ({ category, currentProductId }) => {
   try {
-    // Fetch products from the same category
     const response = await fetch(
       `https://dummyjson.com/products/category/${encodeURIComponent(category)}`
     );
@@ -12,12 +11,10 @@ const RelatedProducts = async ({ category, currentProductId }) => {
     const data = await response.json();
     let relatedProducts = data.products;
 
-    // Exclude the current product
     relatedProducts = relatedProducts.filter(
       (product) => product.id !== parseInt(currentProductId)
     );
 
-    // Limit to 3 products
     relatedProducts = relatedProducts.slice(0, 3);
 
     return (
