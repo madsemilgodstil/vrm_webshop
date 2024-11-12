@@ -8,7 +8,7 @@ const Navigation = () => {
       <div className="flex space-x-6">
         <Link href="/">Home</Link>
         <Link href="/products">Products</Link>
-        <Search />
+        {/* <Search /> */}
       </div>
 
       <Link href="../pages/payment">
