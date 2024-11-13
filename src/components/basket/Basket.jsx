@@ -1,4 +1,4 @@
-import Button from "@/components/knapper/ButtonPri";
+import ButtonPri from "@/components/knapper/ButtonPri";
 
 const Basket = () => {
   return (
@@ -15,6 +15,8 @@ const Basket = () => {
           </div>
         </div>
         <p className="text-lg">I alt at betale: ,-</p>
+        <br />
+        <ButtonPri text="Betal her" link="/pages/payment/" />
       </div>
     </div>
   );

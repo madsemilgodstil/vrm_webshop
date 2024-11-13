@@ -8,7 +8,7 @@ export default async function Home () {
       <ProductList />
       <div className='basket-wrapper'>
         <Basket />
-        <ButtonPri text='Gå til kurv' link='./payment/' />
+        {/* <ButtonPri text='Gå til kurv' link='./payment/' /> */}
       </div>
     </div>
   )
