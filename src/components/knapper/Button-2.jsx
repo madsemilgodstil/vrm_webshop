@@ -1,11 +1,10 @@
-const Button2 = ({ link, text }) => {
+// Button-2.js
+
+const Button2 = ({ text, onClick }) => {
   return (
-    <a
-      href={link}
-      className=" text-white bg-black  hover:bg-white hover:text-[#000000] px-6 py-1 rounded-lg transition duration-300 ease-in-out cursor-pointer"
-    >
+    <button className="your-button-styles" onClick={onClick}>
       {text}
-    </a>
+    </button>
   );
 };
 
