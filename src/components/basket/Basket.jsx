@@ -1,5 +1,5 @@
 import Payment from "@/components/payment/Payment";
-import Button from "@/components/knapper/button";
+import Button from "@/components/knapper/ButtonPri";
 
 const Basket = () => {
   return (

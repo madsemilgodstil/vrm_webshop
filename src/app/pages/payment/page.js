@@ -1,11 +1,11 @@
 import Payment from "@/components/payment/Payment";
-import Button from "@/components/knapper/button";
+import ButtonPri from "@/components/knapper/ButtonPri";
 
 export default function PaymentPage() {
   return (
     <div className="max-w-[700px] mx-auto my-10">
       <Payment />
-      <Button text="Betal her" />
+      <ButtonPri text="Betal her" />
     </div>
   );
 }
