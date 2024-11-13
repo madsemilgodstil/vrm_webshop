@@ -1,12 +1,57 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button2 from "../knapper/ButtonSec";
 import ButtonSec from "../knapper/ButtonSec";
-
-const response = await fetch("https://dummyjson.com/products");
-const data = await response.json();
+import Category from "../category/Category";
+import Search from "../search/Search";
 
 const ProductList = () => {
+  const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  // Definer kategorier
+  const categories = [
+    { slug: "all", name: "All" },
+    { slug: "skin-care", name: "Skin Care" },
+    { slug: "fragrances", name: "Fragrances" },
+    { slug: "beauty", name: "Beauty" },
+    { slug: "womens-jewellery", name: "Womens Jewellery" },
+    { slug: "womens-dresses", name: "Womens Dresses" },
+    { slug: "womens-bags", name: "Womens Bags" },
+  ];
+
+  // Hent produkter fra de ønskede kategorier
+  useEffect(() => {
+    const fetchProducts = async () => {
+      let allProducts = [];
+
+      if (selectedCategory === "all") {
+        for (let category of categories) {
+          if (category.slug !== "all") {
+            const response = await fetch(
+              `https://dummyjson.com/products/category/${category.slug}`
+            );
+            const data = await response.json();
+            allProducts = [...allProducts, ...data.products];
+          }
+        }
+      } else {
+        const response = await fetch(
+          `https://dummyjson.com/products/category/${selectedCategory}`
+        );
+        const data = await response.json();
+        allProducts = data.products;
+      }
+
+      setProducts(allProducts);
+    };
+
+    fetchProducts();
+  }, [selectedCategory]);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
       {data.products.map((product) => (
@@ -30,7 +75,7 @@ const ProductList = () => {
           <p className="text-xl font-bold text-gray-700 mb-4">
             ${product.price}
           </p>
-          <ButtonSec text="Køb" />
+          <Button2 text="Buy" />
         </div>
       ))}
     </div>
