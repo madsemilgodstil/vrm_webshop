@@ -16,7 +16,7 @@ const Basket = () => {
         </div>
         <p className="text-lg">I alt at betale: ,-</p>
       </div>
-      <Button text="Gå til kurv" />
+      {/* <Button text="Gå til kurv" /> */}
     </div>
   );
 };
