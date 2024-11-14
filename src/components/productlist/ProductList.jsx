@@ -55,13 +55,15 @@ const ProductList = ({ addToBasket }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border border-gray-200 rounded-lg shadow-lg bg-white p-4 flex flex-col items-center">
-            {product.thumbnail ? (
-              <Image src={product.thumbnail} width={250} height={250} alt={product.title} className="rounded-md mb-4" />
-            ) : (
-              <div className="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-md mb-4">
-                <span>No Image Available</span>
-              </div>
-            )}
+            <Link href={`/pages/singleproduct/${product.id}`}>
+              {product.thumbnail ? (
+                <Image src={product.thumbnail} width={250} height={250} alt={product.title} className="rounded-md mb-4" />
+              ) : (
+                <div className="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-md mb-4">
+                  <span>No Image Available</span>
+                </div>
+              )}
+            </Link>
             <Link href={`/pages/singleproduct/${product.id}`} className="text-lg font-semibold text-gray-800 hover:text-blue-600 mb-2">
               {product.title}
             </Link>
