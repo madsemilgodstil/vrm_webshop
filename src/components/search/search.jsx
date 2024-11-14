@@ -15,80 +15,44 @@ const Search = ({ products }) => {
     setHasSearched(true);
 
     if (searchQuery) {
-      const filteredProducts = products.filter(
-        (product) =>
-          product.title.toLowerCase().includes(searchQuery) ||
-          product.category.toLowerCase().includes(searchQuery) ||
-          (product.tags &&
-            product.tags.some((tag) => tag.toLowerCase().includes(searchQuery)))
-      );
+      const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchQuery) || product.category.toLowerCase().includes(searchQuery) || (product.tags && product.tags.some((tag) => tag.toLowerCase().includes(searchQuery))));
       setResults(filteredProducts);
     } else {
       setResults([]);
     }
   };
 
-  const handleFocus = () => {
-    if (query) {
-      const filteredProducts = products.filter(
-        (product) =>
-          product.title.toLowerCase().includes(query) ||
-          product.category.toLowerCase().includes(query) ||
-          (product.tags &&
-            product.tags.some((tag) => tag.toLowerCase().includes(query)))
-      );
-      setResults(filteredProducts);
-    }
-    setHasSearched(true);
-  };
-
-  const handleBlur = () => {
+  const handleClearResults = () => {
     setResults([]);
     setHasSearched(false);
+    setQuery("");
   };
 
   return (
-    <div className="search-component relative w-full">
+    <div className="search-component w-full">
       <div className="flex w-[400px]">
-        <input
-          type="text"
-          placeholder="Search by name, category, or tags..."
-          value={query}
-          onChange={handleSearch}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          className="border p-2 w-full h-10"
-        />
+        <input type="text" placeholder="Search by name, category, or tags..." value={query} onChange={handleSearch} onFocus={() => setHasSearched(true)} className="border p-2 w-full h-10 rounded" />
       </div>
 
       {results.length > 0 && (
-        <div className="absolute top-full left-0 bg-white shadow-lg z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[600px] p-4 max-h-[640px] overflow-y-auto">
+        <div className="absolute top-full bg-white shadow-lg z-10 grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-h-[640px] overflow-y-auto mt-2">
           {results.map((product) => (
-            <div
+            <Link
+              href={`/pages/singleproduct/${product.id}`}
               key={product.id}
-              className="flex flex-col items-center p-4 text-black bg-[#f8f8f8] w-full"
+              className="flex flex-col items-center p-4 text-black bg-[#f8f8f8] w-full border rounded-lg hover:bg-gray-100 transition"
+              onClick={handleClearResults} // Lukker resultaterne ved klik på link
             >
-              <Link href={`/products/${product.id}`}>
-                <Image
-                  src={product.thumbnail}
-                  alt={product.title}
-                  width={100}
-                  height={100}
-                />
-                <h3 className="font-semibold mt-2">{product.title}</h3>
-                <p className="text-sm text-gray-700">{product.description}</p>
-                <p className="font-bold mt-1">Price: ${product.price}</p>
-              </Link>
-            </div>
+              <Image src={product.thumbnail} alt={product.title} width={100} height={100} />
+              <h3 className="font-semibold mt-2">{product.title}</h3>
+              <p className="text-sm text-gray-700">{product.description}</p>
+              <p className="font-bold mt-1">Price: ${product.price}</p>
+            </Link>
           ))}
         </div>
       )}
 
-      {hasSearched && results.length === 0 && query && (
-        <p className="mt-4 text-center text-gray-600">
-          No results found for "{query}".
-        </p>
-      )}
+      {hasSearched && results.length === 0 && query && <p className="mt-4 text-center text-gray-600">No results found for "{query}".</p>}
     </div>
   );
 };

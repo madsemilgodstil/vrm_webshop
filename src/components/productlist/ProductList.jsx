@@ -18,7 +18,7 @@ const ProductList = ({ addToBasket }) => {
     { slug: "beauty", name: "Beauty" },
     { slug: "womens-jewellery", name: "Womens Jewellery" },
     { slug: "womens-dresses", name: "Womens Dresses" },
-    { slug: "womens-bags", name: "Womens Bags" }
+    { slug: "womens-bags", name: "Womens Bags" },
   ];
 
   useEffect(() => {
@@ -28,9 +28,7 @@ const ProductList = ({ addToBasket }) => {
       if (selectedCategory === "all") {
         for (let category of categories) {
           if (category.slug !== "all") {
-            const response = await fetch(
-              `https://dummyjson.com/products/category/${category.slug}`
-            );
+            const response = await fetch(`https://dummyjson.com/products/category/${category.slug}`);
             const data = await response.json();
             allFetchedProducts = [...allFetchedProducts, ...data.products];
           }
@@ -38,9 +36,7 @@ const ProductList = ({ addToBasket }) => {
         setAllProducts(allFetchedProducts);
         setProducts(allFetchedProducts);
       } else {
-        const response = await fetch(
-          `https://dummyjson.com/products/category/${selectedCategory}`
-        );
+        const response = await fetch(`https://dummyjson.com/products/category/${selectedCategory}`);
         const data = await response.json();
         setProducts(data.products);
       }
@@ -51,45 +47,27 @@ const ProductList = ({ addToBasket }) => {
 
   return (
     <div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between relative mb-4">
         <Search products={allProducts} />
-        <Category
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
+        <Category categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="p-4 flex flex-col items-center bg-[#F8F8F8]"
-          >
+          <div key={product.id} className="p-4 flex flex-col items-center bg-[#F8F8F8]">
             {product.thumbnail ? (
               <Link href={`/pages/singleproduct/${product.id}`}>
-                <Image
-                  src={product.thumbnail}
-                  width={250}
-                  height={250}
-                  alt={product.title}
-                  className="rounded-md mb-4 hover:scale-90 transition duration-300 ease-in-out cursor-pointer "
-                />
+                <Image src={product.thumbnail} width={250} height={250} alt={product.title} className="rounded-md mb-4 hover:scale-90 transition duration-300 ease-in-out cursor-pointer " />
               </Link>
             ) : (
               <div className="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-md mb-4">
                 <span>No Image Available</span>
               </div>
             )}
-            <Link
-              href={`/pages/singleproduct/${product.id}`}
-              className="text-lg font-semibold text-gray-800 mb-2 hover:text-opacity-45"
-            >
+            <Link href={`/pages/singleproduct/${product.id}`} className="text-lg font-semibold text-gray-800 mb-2 hover:text-opacity-45">
               {product.title}
             </Link>
-            <p className="text-xl font-bold text-gray-700 mb-4 p-2">
-              ${product.price}
-            </p>
+            <p className="text-xl font-bold text-gray-700 mb-4 p-2">${product.price}</p>
             <div className="flex justify-center mt-auto">
               {" "}
               {/* Flex container for button */}
