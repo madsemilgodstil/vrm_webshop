@@ -87,7 +87,7 @@ const ProductList = ({ addToBasket }) => {
             >
               {product.title}
             </Link>
-            <p className="text-xl font-bold text-gray-700 mb-4 p-6">
+            <p className="text-xl font-bold text-gray-700 mb-4 p-2">
               ${product.price}
             </p>
             <div className="flex justify-center mt-auto">
