@@ -52,7 +52,7 @@ export default function SingleProductPage() {
 
               <div className="mt-52 flex justify-between items-end">
                 <p className="text-xl font-semibold">Pris: ${product.price}</p>
-                <ButtonSec text="Køb" />
+                <ButtonSec text="Buy" />
               </div>
             </div>
           </div>
