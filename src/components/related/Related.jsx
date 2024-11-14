@@ -32,8 +32,8 @@ const RelatedProducts = ({ category, currentProductId }) => {
       <h2 className="text-lg font-semibold mb-4">Related Products</h2>
       <div className="related-items grid grid-cols-1 sm:grid-cols-3 gap-6">
         {relatedProducts.map((product) => (
-          <div key={product.id} className="item border p-4 rounded-lg">
-            <Image src={product.thumbnail} alt={product.title} width={150} height={150} className="rounded-md mb-3" />
+          <div key={product.id} className="item p-4 bg-[#f8f8f8]">
+            <Image src={product.thumbnail} alt={product.title} width={150} height={150} className="rounded-md mb-3 mx-auto" />
             <h3 className="font-bold">{product.title}</h3>
             <p className="text-sm mb-2">{product.description}</p>
             <ButtonSec link={`/pages/singleproduct/${product.id}`} text="View Product" />
