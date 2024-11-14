@@ -17,15 +17,14 @@ const Hero = () => {
       />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-15 text-white gap-8">
-        <h1 className="text-3xl font-bold">Velkommen til vores side</h1>
+        <h1 className="text-3xl font-bold">Welcome to our site</h1>
         <p className="mx-12 font-bold max-w-3xl text-center">
-          Velkommen til vores købsportal – din ultimative destination for alt
-          inden for skønhed og stil! Vi tilbyder et håndplukket udvalg af
-          beauty-produkter, elegante tasker, smukke kjoler og luksuriøs
-          skincare. Uanset om du ønsker at opgradere din garderobe, forkæle din
-          hud eller finde det perfekte tilbehør, har vi noget for enhver smag.
+          in beauty and style! We offer a carefully selected range of beauty
+          products, elegant bags, beautiful dresses, and luxurious skincare.
+          Whether you're looking to upgrade your wardrobe, pamper your skin, or
+          find the perfect accessory, we have something for every taste."
         </p>
-        <ButtonPri text="Gå på opdagelse" link="/pages/products"></ButtonPri>
+        <ButtonPri text="Explore" link="/pages/products"></ButtonPri>
       </div>
     </div>
   );
