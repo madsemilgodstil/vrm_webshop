@@ -48,7 +48,7 @@ const Search = ({ products }) => {
   };
 
   return (
-    <div className="search-component">
+    <div className="search-component relative w-full">
       <div className="flex w-[400px]">
         <input
           type="text"
@@ -57,16 +57,16 @@ const Search = ({ products }) => {
           onChange={handleSearch}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          className="border p-2 w-full h-10 overflow-hidden" // Brug hele bredden
+          className="border p-2 w-full h-10"
         />
       </div>
 
       {results.length > 0 && (
-        <div className="search-results grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 max-w-[600px] overflow-y-auto max-h-[300px]">
+        <div className="absolute top-full left-0 bg-white shadow-lg z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[600px] p-4 max-h-[640px] overflow-y-auto">
           {results.map((product) => (
             <div
               key={product.id}
-              className="item flex flex-col items-center p-4 bg-white text-black border rounded-lg shadow w-full"
+              className="flex flex-col items-center p-4 text-black bg-[#f8f8f8] w-full"
             >
               <Link href={`/products/${product.id}`}>
                 <Image
