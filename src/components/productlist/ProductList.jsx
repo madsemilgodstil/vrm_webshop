@@ -7,12 +7,11 @@ import Button2 from "../knapper/ButtonSec";
 import Category from "../category/Category";
 import Search from "../search/Search";
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]); // Viser produkter baseret på valgt kategori
-  const [allProducts, setAllProducts] = useState([]); // Indeholder alle produkter for søgning
+const ProductList = ({ addToBasket }) => {
+  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Definer kategorier
   const categories = [
     { slug: "all", name: "All" },
     { slug: "skin-care", name: "Skin Care" },
@@ -23,10 +22,9 @@ const ProductList = () => {
     { slug: "womens-bags", name: "Womens Bags" },
   ];
 
-  // Hent produkter fra de ønskede kategorier
   useEffect(() => {
     const fetchProducts = async () => {
-      let allFetchedProducts = []; // Midlertidig variabel for at samle alle produkter
+      let allFetchedProducts = [];
 
       if (selectedCategory === "all") {
         for (let category of categories) {
@@ -36,8 +34,8 @@ const ProductList = () => {
             allFetchedProducts = [...allFetchedProducts, ...data.products];
           }
         }
-        setAllProducts(allFetchedProducts); // Gem alle produkter til søgning
-        setProducts(allFetchedProducts); // Viser alle produkter ved "all"
+        setAllProducts(allFetchedProducts);
+        setProducts(allFetchedProducts);
       } else {
         const response = await fetch(`https://dummyjson.com/products/category/${selectedCategory}`);
         const data = await response.json();
@@ -50,24 +48,29 @@ const ProductList = () => {
 
   return (
     <div>
-      <div>
-        {/* Kategori-vælger */}
-        <Category categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <Category categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <Search products={allProducts} />
 
-        {/* Send allProducts til Search-komponent */}
-        <Search products={allProducts} />
-      </div>
-
-      {/* Produktliste */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border border-gray-200 rounded-lg shadow-lg bg-white p-4 flex flex-col items-center">
-            <Image src={product.thumbnail} width={250} height={250} alt={product.title} className="rounded-md mb-4" />
+            {product.thumbnail ? (
+              <Image src={product.thumbnail} width={250} height={250} alt={product.title} className="rounded-md mb-4" />
+            ) : (
+              <div className="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-md mb-4">
+                <span>No Image Available</span>
+              </div>
+            )}
             <Link href={`/pages/singleproduct/${product.id}`} className="text-lg font-semibold text-gray-800 hover:text-blue-600 mb-2">
               {product.title}
             </Link>
             <p className="text-xl font-bold text-gray-700 mb-4">${product.price}</p>
-            <Button2 text="Buy" />
+            <button
+              className="text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300"
+              onClick={() => addToBasket(product)} // Tilføj produktet til kurven
+            >
+              Buy
+            </button>
           </div>
         ))}
       </div>
