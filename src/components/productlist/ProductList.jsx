@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Button2 from "../knapper/ButtonSec";
 import Category from "../category/Category";
 import Search from "../search/Search";
 
@@ -48,8 +47,10 @@ const ProductList = ({ addToBasket }) => {
 
   return (
     <div>
-      <Category categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-      <Search products={allProducts} />
+      <div className="flex justify-between mb-4">
+        <Search products={allProducts} />
+        <Category categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {products.map((product) => (
@@ -66,7 +67,7 @@ const ProductList = ({ addToBasket }) => {
             </Link>
             <p className="text-xl font-bold text-gray-700 mb-4">${product.price}</p>
             <button
-              className="text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300"
+              className="inline-block text-white bg-black border hover:bg-white hover:text-[#000000] border-2 border-black hover:border-black px-6 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer"
               onClick={() => addToBasket(product)} // Tilføj produktet til kurven
             >
               Buy

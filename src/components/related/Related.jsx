@@ -1,50 +1,47 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import ButtonSec from "../knapper/ButtonSec";
+import { useEffect, useState } from "react";
 
-const RelatedProducts = async ({ category, currentProductId }) => {
-  try {
-    const response = await fetch(
-      `https://dummyjson.com/products/category/${encodeURIComponent(category)}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch related products");
-    }
-    const data = await response.json();
-    let relatedProducts = data.products;
+const RelatedProducts = ({ category, currentProductId }) => {
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
-    relatedProducts = relatedProducts.filter(
-      (product) => product.id !== parseInt(currentProductId)
-    );
+  useEffect(() => {
+    const fetchRelatedProducts = async () => {
+      const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+      const data = await response.json();
 
-    relatedProducts = relatedProducts.slice(0, 3);
+      // 1. Filtrér produkter for at ekskludere det aktuelle produkt
+      const productsExcludingCurrent = data.products.filter((product) => {
+        return product.id !== parseInt(currentProductId);
+      });
 
-    return (
-      <>
-        <h2 className="text-lg font-semibold mb-4">Related Products</h2>
-        <div className="related-items grid grid-cols-1 sm:grid-cols-3">
-          {relatedProducts.map((product) => (
-            <div
-              key={product.id}
-              className="item p-4 gap-8 hover:scale-110 transition duration-300 ease-in-out cursor-pointer"
-            >
-              <Image
-                src={product.thumbnail}
-                alt={product.title}
-                width={150}
-                height={150}
-              />
-              <div className=" p-5 rounded-lg">
-                <h3 className="font-bold">{product.title}</h3>
-                <p>{product.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </>
-    );
-  } catch (error) {
-    console.error(error);
-    return <p>Could not load related products. Please try again later.</p>;
-  }
+      // 2. Begræns resultatet til de første 3 produkter
+      const relatedProductsList = productsExcludingCurrent.slice(0, 3);
+
+      setRelatedProducts(relatedProductsList);
+    };
+
+    fetchRelatedProducts();
+  }, [category, currentProductId]);
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold mb-4">Related Products</h2>
+      <div className="related-items grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {relatedProducts.map((product) => (
+          <div key={product.id} className="item border p-4 rounded-lg">
+            <Image src={product.thumbnail} alt={product.title} width={150} height={150} className="rounded-md mb-3" />
+            <h3 className="font-bold">{product.title}</h3>
+            <p className="text-sm mb-2">{product.description}</p>
+            <ButtonSec link={`/pages/singleproduct/${product.id}`} text="View Product" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RelatedProducts;

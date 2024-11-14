@@ -34,7 +34,7 @@ const Basket = ({ items }) => {
           </div>
         ))}
         <p className="text-lg">I alt at betale: ${items.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
-        <button onClick={handleCheckout} className="text-white bg-black px-4 py-2 rounded-full">
+        <button onClick={handleCheckout} className="inline-block text-white bg-black border hover:bg-white hover:text-[#000000] border-2 border-black hover:border-black px-6 py-1 rounded-full transition duration-300 ease-in-out cursor-pointer">
           Betal her
         </button>
       </div>
