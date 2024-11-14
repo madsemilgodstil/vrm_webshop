@@ -15,7 +15,13 @@ const Search = ({ products }) => {
     setHasSearched(true);
 
     if (searchQuery) {
-      const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchQuery) || product.category.toLowerCase().includes(searchQuery) || (product.tags && product.tags.some((tag) => tag.toLowerCase().includes(searchQuery))));
+      const filteredProducts = products.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchQuery) ||
+          product.category.toLowerCase().includes(searchQuery) ||
+          (product.tags &&
+            product.tags.some((tag) => tag.toLowerCase().includes(searchQuery)))
+      );
       setResults(filteredProducts);
     } else {
       setResults([]);
@@ -24,7 +30,13 @@ const Search = ({ products }) => {
 
   const handleFocus = () => {
     if (query) {
-      const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(query) || product.category.toLowerCase().includes(query) || (product.tags && product.tags.some((tag) => tag.toLowerCase().includes(query))));
+      const filteredProducts = products.filter(
+        (product) =>
+          product.title.toLowerCase().includes(query) ||
+          product.category.toLowerCase().includes(query) ||
+          (product.tags &&
+            product.tags.some((tag) => tag.toLowerCase().includes(query)))
+      );
       setResults(filteredProducts);
     }
     setHasSearched(true);
@@ -52,9 +64,17 @@ const Search = ({ products }) => {
       {results.length > 0 && (
         <div className="search-results grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 max-w-[600px] overflow-y-auto max-h-[300px]">
           {results.map((product) => (
-            <div key={product.id} className="item flex flex-col items-center p-4 bg-white text-black border rounded-lg shadow w-full">
+            <div
+              key={product.id}
+              className="item flex flex-col items-center p-4 bg-white text-black border rounded-lg shadow w-full"
+            >
               <Link href={`/products/${product.id}`}>
-                <Image src={product.thumbnail} alt={product.title} width={100} height={100} />
+                <Image
+                  src={product.thumbnail}
+                  alt={product.title}
+                  width={100}
+                  height={100}
+                />
                 <h3 className="font-semibold mt-2">{product.title}</h3>
                 <p className="text-sm text-gray-700">{product.description}</p>
                 <p className="font-bold mt-1">Price: ${product.price}</p>
@@ -64,7 +84,11 @@ const Search = ({ products }) => {
         </div>
       )}
 
-      {hasSearched && results.length === 0 && query && <p className="mt-4 text-center text-gray-600">No results found for "{query}".</p>}
+      {hasSearched && results.length === 0 && query && (
+        <p className="mt-4 text-center text-gray-600">
+          No results found for "{query}".
+        </p>
+      )}
     </div>
   );
 };
