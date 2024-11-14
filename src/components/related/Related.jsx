@@ -10,7 +10,9 @@ const RelatedProducts = ({ category, currentProductId }) => {
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
-      const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+      const response = await fetch(
+        `https://dummyjson.com/products/category/${category}`
+      );
       const data = await response.json();
 
       // 1. Filtrér produkter for at ekskludere det aktuelle produkt
@@ -33,10 +35,19 @@ const RelatedProducts = ({ category, currentProductId }) => {
       <div className="related-items grid grid-cols-1 sm:grid-cols-3 gap-6">
         {relatedProducts.map((product) => (
           <div key={product.id} className="item p-4 bg-[#f8f8f8]">
-            <Image src={product.thumbnail} alt={product.title} width={150} height={150} className="rounded-md mb-3 mx-auto" />
+            <Image
+              src={product.thumbnail}
+              alt={product.title}
+              width={150}
+              height={150}
+              className="rounded-md mb-3 mx-auto"
+            />
             <h3 className="font-bold">{product.title}</h3>
             <p className="text-sm mb-2">{product.description}</p>
-            <ButtonSec link={`/pages/singleproduct/${product.id}`} text="View Product" />
+            <ButtonSec
+              link={`/pages/singleproduct/${product.id}`}
+              text="View Product"
+            />
           </div>
         ))}
       </div>

@@ -22,7 +22,7 @@ const Hero = () => {
           in beauty and style! We offer a carefully selected range of beauty
           products, elegant bags, beautiful dresses, and luxurious skincare.
           Whether you're looking to upgrade your wardrobe, pamper your skin, or
-          find the perfect accessory, we have something for every taste."
+          find the perfect accessory, we have something for every taste.
         </p>
         <ButtonPri text="Explore" link="/pages/products"></ButtonPri>
       </div>
